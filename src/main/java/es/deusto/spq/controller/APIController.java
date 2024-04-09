@@ -16,9 +16,16 @@ public class APIController {
     private JuegoService juegoService;
 
     @RequestMapping("/test")
-    public String requestMethodName() {
+    public String holaMundo() {
         return new String("Hola Mundo");
     }
+
+    @RequestMapping("/prueba")
+    public String prueba() {
+        return juegoService.prueba();
+    }
+
+
     
     
     

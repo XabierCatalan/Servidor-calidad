@@ -3,11 +3,20 @@ package es.deusto.spq.service;
 import java.util.ArrayList;
 
 public class JuegoService {
+
+    public String prueba() {
+        return "Prueba";
+    }
+
+
+
     public static void crearJuego() {
         ArrayList<String> tipos = new ArrayList<>();
         ArrayList<String> regiones = new ArrayList<>();
         ArrayList<String> lateral = new ArrayList<>();
         ArrayList<String> arriba = new ArrayList<>();
+
+        
 
 
         for (int i = 0; i < 3; i++) {
@@ -38,5 +47,7 @@ public class JuegoService {
                 //System.out.println(listaPokemons);
             }
         }
+        
     }
+
 }
