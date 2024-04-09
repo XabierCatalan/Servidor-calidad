@@ -2,6 +2,10 @@ package es.deusto.spq.service;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class JuegoService {
 
     public String prueba() {
