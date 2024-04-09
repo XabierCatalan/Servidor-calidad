@@ -1,12 +1,20 @@
 package es.deusto.spq.model;
+import javax.persistence.*;
 
 
-
+@Entity
 public class Pokemon {
+    @Id
     private int pokedexNumber;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "Tipo1")
     private Tipo type1;
+    @ManyToOne
+    @JoinColumn(name = "Tipo2")
     private Tipo type2;
+    @ManyToOne
+    @JoinColumn(name = "Region")
     private Region region;
 
     public Pokemon() {

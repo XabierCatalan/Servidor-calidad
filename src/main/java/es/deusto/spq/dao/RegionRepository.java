@@ -1,13 +1,10 @@
 package es.deusto.spq.dao;
 
-public enum RegionRepository {
-    KANTO,
-    JOHTO,
-    HOENN,
-    SINNOH,
-    TESELIA,
-    KALOS,
-    ALOLA,
-    GALAR,
-    PALDEA;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import es.deusto.spq.model.Region;
+
+@Repository
+public interface RegionRepository extends JpaRepository<Region, Integer> {
+    // Puedes agregar métodos adicionales según tus necesidades
 }
