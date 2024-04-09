@@ -1,18 +1,5 @@
 package es.deusto.spq;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /*public class Main {
     public static void main(String[] args) {
         ServerSocket server = null;
@@ -46,7 +33,6 @@ import java.util.logging.Logger;
             }
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
         }

@@ -6,7 +6,6 @@ import java.util.List;
 import es.deusto.spq.model.Region;
 import es.deusto.spq.model.Tipo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -15,7 +14,6 @@ public class JuegoService {
     private final TipoService tipoService;
     private final RegionService regionService;
 
-    @Autowired
     public JuegoService(TipoService tipoService, RegionService regionService) {
         this.tipoService = tipoService;
         this.regionService = regionService;
@@ -53,12 +51,12 @@ public class JuegoService {
         System.out.println("Arriba: " + arriba);
         System.out.println("Lateral: " + lateral);
 
-        for (String arribaElement : arriba) {
+        /*for (String arribaElement : arriba) {
             for (String lateralElement : lateral) {
                 //List<String> listaPokemons = obtenerLista(arribaElement, lateralElement);
                 //System.out.println(listaPokemons);
             }
-        }
+        }*/
         
     }
 

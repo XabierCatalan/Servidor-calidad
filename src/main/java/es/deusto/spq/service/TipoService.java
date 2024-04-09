@@ -1,6 +1,5 @@
 package es.deusto.spq.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import es.deusto.spq.dao.TipoRepository;
@@ -11,7 +10,6 @@ public class TipoService {
 
     private final TipoRepository tipoRepository;
 
-    @Autowired
     public TipoService(TipoRepository tipoRepository) {
         this.tipoRepository = tipoRepository;
     }

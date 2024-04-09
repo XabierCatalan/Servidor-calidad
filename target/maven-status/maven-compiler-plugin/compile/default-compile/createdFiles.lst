@@ -1,0 +1,16 @@
+es\deusto\spq\dao\RegionRepository.class
+es\deusto\spq\config\DataSourceConfig.class
+es\deusto\spq\model\Tipo.class
+es\deusto\spq\service\JuegoService.class
+es\deusto\spq\model\Pokemon.class
+es\deusto\spq\config\JpaConfig.class
+es\deusto\spq\service\PokemonService.class
+es\deusto\spq\service\TipoService.class
+es\deusto\spq\PokeDokuApplication.class
+es\deusto\spq\dao\TipoRepository.class
+es\deusto\spq\controller\SqliteController.class
+es\deusto\spq\model\Region.class
+es\deusto\spq\config\TransactionConfig.class
+es\deusto\spq\controller\APIController.class
+es\deusto\spq\service\RegionService.class
+es\deusto\spq\dao\PokemonRepository.class
