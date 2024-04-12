@@ -1,0 +1,15 @@
+com\conection\dialect\SQLiteDialect.class
+com\conection\repository\PokemonRepository.class
+com\conection\dialect\SQLiteDialect$2.class
+com\conection\services\JuegoService.class
+com\conection\config\DatasourceConfig.class
+com\conection\SpringSqLiteConectionApplication.class
+com\conection\entities\Region.class
+com\conection\dialect\SQLiteDialect$SQLiteUniqueDelegate.class
+com\conection\repository\TipoRepository.class
+com\conection\repository\RegionRepository.class
+com\conection\dialect\SQLiteDialect$1.class
+com\conection\entities\Tipo.class
+com\conection\controller\APIController.class
+com\conection\services\PokemonService.class
+com\conection\entities\Pokemon.class
