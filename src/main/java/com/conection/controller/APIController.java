@@ -49,12 +49,12 @@ public class APIController {
     }
 
     @RequestMapping("/listap")
-    public ArrayList<Pokemon> listap() {
-        ArrayList<Pokemon> lista = new ArrayList<Pokemon>();
+    public ArrayList<String> listap() {
+        ArrayList<String> lista = new ArrayList<String>();
 
         pokemonRepository.findAll().forEach(pokemon ->{
-            lista.add(pokemon);
-
+            lista.add(pokemon.getNombre());
+            
         });
 
         return lista;
