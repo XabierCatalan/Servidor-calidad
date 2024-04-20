@@ -1,7 +1,6 @@
 package com.conection.controller;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.conection.entities.Pokemon;
 import com.conection.entities.Region;
 import com.conection.entities.Tipo;
 import com.conection.repository.PokemonRepository;
@@ -9,7 +8,6 @@ import com.conection.repository.RegionRepository;
 import com.conection.repository.TipoRepository;
 import com.conection.services.JuegoService;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +45,21 @@ public class APIController {
 
         return juego;
     }
+
+    @RequestMapping("/condicionTipo")
+    public List<String> getCondicionesTipo() {
+        List<String> condicionesTipo = juegoService.getCondicionesTipo();
+
+        return condicionesTipo;
+    }
+
+    @RequestMapping("/condicionRegion")
+    public List<String> getCondicionesRegion() {
+        List<String> condicionesRegion = juegoService.getCondicionesRegion();
+
+        return condicionesRegion;
+    }
+
 
     @RequestMapping("/listap")
     public ArrayList<String> listap() {

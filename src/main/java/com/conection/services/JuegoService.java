@@ -1,10 +1,10 @@
 package com.conection.services;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import com.conection.entities.Region;
 import com.conection.entities.Tipo;
@@ -33,37 +33,59 @@ public class JuegoService {
         return "Hola";
     }
 
+    private ArrayList<Tipo> todosTipos = new ArrayList<>();
+    private ArrayList<Region> todosRegiones = new  ArrayList<>(); 
 
+    private ArrayList<Region> lateral = new ArrayList<>();
+    private ArrayList<Tipo> arriba = new ArrayList<>(); 
+
+    private ArrayList<String> lateralNombre;
+    private ArrayList<String> arribaNombre; 
 
     public HashMap<Integer , List<String>> crearJuego() {
         
         HashMap<Integer , List<String>> juego = new HashMap<>(); //hasmap donde el integer es la posicion en la matriz y list<String> es la lista de los nombres pokemons
 
-        ArrayList<Tipo> TodosTipos = new ArrayList<>();
-        ArrayList<Region> TodosRegiones = new  ArrayList<>(); 
 
-        ArrayList<Region> lateral = new ArrayList<>();
-        ArrayList<Tipo> arriba = new ArrayList<>(); //Guardamos el tipo entero
+
+        lateralNombre = new ArrayList<>();
+        arribaNombre = new ArrayList<>();
 
         tipoRepository.findAll().forEach(tipo ->{
-            TodosTipos.add(tipo);
+            todosTipos.add(tipo);
         });
 
         regionRepository.findAll().forEach(region ->{
-            TodosRegiones.add(region);
+            todosRegiones.add(region);
         });
+
+        ArrayList<Tipo> tipos = todosTipos;
+        ArrayList<Region> regiones = todosRegiones; 
+        Set<Integer> selectedTipoIndices = new HashSet<>();
+        Set<Integer> selectedRegionIndices = new HashSet<>();
       
-
-
         for (int i = 0; i < 3; i++) {
-            int randomRegion = (int) (Math.random() * TodosRegiones.size());
-            int randomTipo = (int) (Math.random() * TodosTipos.size());
+            int randomTipoIndex;
+            do {
+                randomTipoIndex = (int) (Math.random() * tipos.size());
+            } while (selectedTipoIndices.contains(randomTipoIndex));
+            selectedTipoIndices.add(randomTipoIndex);
 
-            arriba.add(TodosTipos.get(randomTipo));
-            TodosTipos.remove(randomTipo);
+            int randomRegionIndex;
+            do {
+                randomRegionIndex = (int) (Math.random() * regiones.size());
+            } while (selectedRegionIndices.contains(randomRegionIndex));
+            selectedRegionIndices.add(randomRegionIndex);
 
-            lateral.add(TodosRegiones.get(randomRegion));
-            TodosRegiones.remove(randomRegion);
+
+            Tipo tipoSeleccionado = tipos.get(randomTipoIndex);
+            arriba.add(tipoSeleccionado);
+            arribaNombre.add(tipoSeleccionado.getTipo());
+
+            Region regionSeleccionada = regiones.get(randomRegionIndex);
+            lateral.add(regionSeleccionada);
+            lateralNombre.add(regionSeleccionada.getRegion());
+        
             
         }
  
@@ -88,41 +110,14 @@ public class JuegoService {
         
     }
 
-    /*public void crearJuego() {
-        
-        ArrayList<String> lateral = new ArrayList<>();
-        ArrayList<String> arriba = new ArrayList<>();
+    public List<String> getCondicionesTipo(){
+        System.out.println(arribaNombre);
+        return arribaNombre;
+    }
 
-        for (int i = 0; i < 3; i++) {
-            int randomIndex = (int) (Math.random() * tipos.size());
-            int randomLista = (int) (Math.random() * 2);
-            String tipo = tipos.get(randomIndex).getTipo();
-            arriba.add(tipo);
-            tipos.remove(randomIndex);
-            if (randomLista == 0) {
-                int randomTipo = (int) (Math.random() * tipos.size());
-                String tipo1 = tipos.get(randomTipo).getTipo();
-                lateral.add(tipo1);
-                tipos.remove(randomTipo);
-            } else {
-                int randomRegion = (int) (Math.random() * regiones.size());
-                String region = regiones.get(randomRegion).getNombre();
-                lateral.add(region);
-                regiones.remove(randomRegion);
-            }
-        }
-
-        System.out.println("Arriba: " + arriba);
-        System.out.println("Lateral: " + lateral);
-
-        /*for (String arribaElement : arriba) {
-            for (String lateralElement : lateral) {
-                //List<String> listaPokemons = obtenerLista(arribaElement, lateralElement);
-                //System.out.println(listaPokemons);
-            }
-        }*
-        
-    } */
+    public List<String> getCondicionesRegion(){
+        return lateralNombre;
+    }
 
 }
 
