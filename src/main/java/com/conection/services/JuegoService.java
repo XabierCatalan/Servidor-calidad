@@ -94,11 +94,12 @@ public class JuegoService {
             for (Region region : lateral) {
                 
                 ArrayList<String> listaPokemons = pokemonService.FindPokemonByTypeAndRegion(tipo.getId(), region.getId());
-
+                
                 if (listaPokemons.isEmpty()) {
                     listaPokemons.add("NINGUNO");
                 }
 
+               System.out.println(listaPokemons.get(0).toString());
                 juego.put(juego.size() + 1 , listaPokemons);
                 
             }
