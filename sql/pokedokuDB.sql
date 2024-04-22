@@ -1,3 +1,11 @@
+DROP SCHEMA IF EXISTS pokedokuDB;
+DROP USER IF EXISTS 'spq'@'localhost';
+
+CREATE SCHEMA pokedokuDB;
+CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY 'spq';
+
+GRANT ALL ON pokedokuDB.* TO 'spq'@'localhost';
+
 -- Crear la tabla Regiones
 CREATE TABLE Regiones (
     Id INT PRIMARY KEY,
