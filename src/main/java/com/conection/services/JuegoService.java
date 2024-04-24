@@ -42,6 +42,14 @@ public class JuegoService {
     private ArrayList<String> lateralNombre;
     private ArrayList<String> arribaNombre; 
 
+    public ArrayList<Tipo> findAllTipos(){
+        return (ArrayList<Tipo>) tipoRepository.findAll();
+    }
+
+    public ArrayList<Region> findAllRegion(){
+        return (ArrayList<Region>) regionRepository.findAll();
+    }
+
     public HashMap<Integer , List<String>> crearJuego() {
         
         HashMap<Integer , List<String>> juego = new HashMap<>(); //hasmap donde el integer es la posicion en la matriz y list<String> es la lista de los nombres pokemons
@@ -51,13 +59,8 @@ public class JuegoService {
         lateralNombre = new ArrayList<>();
         arribaNombre = new ArrayList<>();
 
-        tipoRepository.findAll().forEach(tipo ->{
-            todosTipos.add(tipo);
-        });
-
-        regionRepository.findAll().forEach(region ->{
-            todosRegiones.add(region);
-        });
+        todosRegiones = findAllRegion();
+        todosTipos = findAllTipos();
 
         ArrayList<Tipo> tipos = todosTipos;
         ArrayList<Region> regiones = todosRegiones; 
