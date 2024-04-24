@@ -11,10 +11,17 @@
 	<groupId>com.conection</groupId>
 	<artifactId>SpringSQLiteConection</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringSQLiteConection</name>
+	<name>POKEDOKU</name>
 	<description>Springboot SQLite conection</description>
 	<properties>
 		<java.version>17</java.version>
+		<!--COSAS DEL POM DE LOS EJEMPLOS-->
+		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jersey.version>2.35</jersey.version>
+		<server.hostname>127.0.0.1</server.hostname>
+		<server.port>8080</server.port>
+		<!-- Hata aqui -->
 	</properties>
 	<dependencies>
 
@@ -48,12 +55,27 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.14.0</version>
-		</dependency>
 
+		<!--<dependency>
+        	<groupId>org.mockito</groupId>
+        	<artifactId>mockito-all</artifactId>
+        	<version>1.9.5</version>
+  	  </dependency> -->
+		<!-- DEPENDENCIAS NUEVAS MOCKTIO-->
+	  <dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.11.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<!-- enables mock of static methods -->
+			<artifactId>mockito-inline</artifactId>
+			<version>4.6.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- DEPENDENCIAS NUEVAS MOCKTIO-->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -78,6 +100,26 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
