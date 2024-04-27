@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class SpringSqLiteConectionApplication {
+public class SpringMysqlConectionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringSqLiteConectionApplication.class, args);
+		SpringApplication.run(SpringMysqlConectionApplication.class, args);
 	}
 
 
