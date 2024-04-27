@@ -1,6 +1,8 @@
 package com.conection.entities;
 
 
+import javax.jdo.annotations.PersistenceCapable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +19,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "Tipos")
+@PersistenceCapable
+
 public class Tipo {
     
     @Id

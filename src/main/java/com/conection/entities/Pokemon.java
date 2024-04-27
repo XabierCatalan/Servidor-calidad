@@ -1,5 +1,7 @@
 package com.conection.entities;
 
+import javax.jdo.annotations.PersistenceCapable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,6 +20,8 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "Pokemons")
+@PersistenceCapable
+
 public class Pokemon {
     @Id
     private int id;

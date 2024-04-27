@@ -1,19 +1,19 @@
 DROP SCHEMA IF EXISTS pokedokuDB;
 DROP USER IF EXISTS 'spq'@'localhost';
+DROP USER IF EXISTS 'opled'@'localhost';
+
 
 CREATE SCHEMA pokedokuDB;
 CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY 'spq';
+CREATE USER IF NOT EXISTS 'opled'@'localhost' IDENTIFIED BY 'opled';
+
 USE pokedokuDB;
 
 GRANT ALL ON pokedokuDB.* TO 'spq'@'localhost';
+GRANT ALL ON pokedokuDB.* TO 'opled'@'localhost';
 
--- Crear la tabla Usuarios
-CREATE TABLE Usuarios (
-    Id INT PRIMARY KEY,
-    Correo VARCHAR(255),
-    Contra VARCHAR(255),
-    Nivel INT
-);
+
+
 
 -- Crear la tabla Regiones
 CREATE TABLE Regiones (
@@ -29,6 +29,7 @@ CREATE TABLE Tipos (
 
 -- Crear la tabla Pokemons
 CREATE TABLE Pokemons (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(255),
     Tipo1 INT,
     Tipo2 INT,
@@ -38,9 +39,6 @@ CREATE TABLE Pokemons (
     FOREIGN KEY (Region) REFERENCES Regiones(Id)
 );
 
-INSERT INTO Usuarios (Id, Correo, Contra, Nivel) VALUES 
-(1, 'o.perez@opendeusto.es', 'o.perez', 2),
-(2, 'xabier.catalan@opendeusto.es', 'xabier.catalan', 1);
 
 
 INSERT INTO Tipos (Id, Nombre) VALUES

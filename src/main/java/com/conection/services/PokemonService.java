@@ -17,7 +17,7 @@ public class PokemonService {
         String sql = "SELECT Nombre FROM Pokemons WHERE (Tipo1 = ? OR Tipo2 = ?) AND Region = ?";
         ArrayList<String> pokemonNames = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:pokemonBD.db");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/pokedokuDB");
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, tipo);
             statement.setInt(2, tipo);
