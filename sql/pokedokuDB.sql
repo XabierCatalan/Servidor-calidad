@@ -6,6 +6,14 @@ CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY 'spq';
 
 GRANT ALL ON pokedokuDB.* TO 'spq'@'localhost';
 
+-- Crear la tabla Usuarios
+CREATE TABLE Usuarios (
+    Id INT PRIMARY KEY,
+    Correo VARCHAR(255),
+    Contra VARCHAR(255),
+    Nivel INT
+);
+
 -- Crear la tabla Regiones
 CREATE TABLE Regiones (
     Id INT PRIMARY KEY,
@@ -29,6 +37,9 @@ CREATE TABLE Pokemons (
     FOREIGN KEY (Region) REFERENCES Regiones(Id)
 );
 
+INSERT INTO Usuarios (Id, Correo, Contra, Nivel) VALUES 
+(1, 'o.perez@opendeusto.es', 'o.perez', 2),
+(2, 'xabier.catalan@opendeusto.es', 'xabier.catalan', 1);
 
 
 INSERT INTO Tipos (Id, Nombre) VALUES
