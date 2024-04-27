@@ -3,6 +3,7 @@ DROP USER IF EXISTS 'spq'@'localhost';
 
 CREATE SCHEMA pokedokuDB;
 CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY 'spq';
+USE pokedokuDB;
 
 GRANT ALL ON pokedokuDB.* TO 'spq'@'localhost';
 
