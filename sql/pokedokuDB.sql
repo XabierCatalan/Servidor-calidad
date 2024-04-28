@@ -10,9 +10,15 @@ CREATE USER IF NOT EXISTS 'opled'@'localhost' IDENTIFIED BY 'opled';
 USE pokedokuDB;
 
 GRANT ALL ON pokedokuDB.* TO 'spq'@'localhost';
-GRANT ALL ON pokedokuDB.* TO 'opled'@'localhost';
+GRANT ALL PRIVILEGES ON pokedokuDB.* TO 'opled'@'localhost' IDENTIFIED BY 'opled' WITH GRANT OPTION;
 
 
+CREATE TABLE Usuarios (     
+    Id INT PRIMARY KEY,     
+    Correo VARCHAR(255),     
+    Contra VARCHAR(255),     
+    Nivel INT 
+);
 
 
 -- Crear la tabla Regiones
@@ -39,24 +45,26 @@ CREATE TABLE Pokemons (
     FOREIGN KEY (Region) REFERENCES Regiones(Id)
 );
 
-
+INSERT INTO Usuarios (Id, Correo, Contra, Nivel) VALUES 
+(1, 'o.perez@opendeusto.es', 'o.perez', 2),
+(2, 'xabier.catalan@opendeusto.es', 'xabier.catalan', 1);
 
 INSERT INTO Tipos (Id, Nombre) VALUES
 (1, 'NORMAL'),
 (2, 'FUEGO'),
 (3, 'AGUA'),
 (4, 'PLANTA'),
-(5, 'ELÉCTRICO'),
+(5, 'ELECTRICO'),
 (6, 'HIELO'),
 (7, 'LUCHA'),
 (8, 'VENENO'),
 (9, 'TIERRA'),
 (10, 'VOLADOR'),
-(11, 'PSÍQUICO'),
+(11, 'PSIQUICO'),
 (12, 'BICHO'),
 (13, 'ROCA'),
 (14, 'FANTASMA'),
-(15, 'DRAGÓN'),
+(15, 'DRAGON'),
 (16, 'SINIESTRO'),
 (17, 'ACERO'),
 (18, 'HADA'),
@@ -69,7 +77,7 @@ INSERT INTO Regiones (Id, Nombre) VALUES (1, 'KANTO');
 INSERT INTO Regiones (Id, Nombre) VALUES (2, 'JOHTO');
 INSERT INTO Regiones (Id, Nombre) VALUES (3, 'HOENN');
 INSERT INTO Regiones (Id, Nombre) VALUES (4, 'SINNOH');
-INSERT INTO Regiones (Id, Nombre) VALUES (5, 'UNOVA');
+INSERT INTO Regiones (Id, Nombre) VALUES (5, 'TESELIA');
 INSERT INTO Regiones (Id, Nombre) VALUES (6, 'KALOS');
 INSERT INTO Regiones (Id, Nombre) VALUES (7, 'ALOLA');
 INSERT INTO Regiones (Id, Nombre) VALUES (8, 'GALAR');

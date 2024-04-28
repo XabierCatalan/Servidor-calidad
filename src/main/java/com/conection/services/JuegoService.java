@@ -36,8 +36,8 @@ public class JuegoService {
     private ArrayList<Tipo> todosTipos = new ArrayList<>();
     private ArrayList<Region> todosRegiones = new  ArrayList<>(); 
 
-    private ArrayList<Region> lateral = new ArrayList<>();
-    private ArrayList<Tipo> arriba = new ArrayList<>(); 
+    private ArrayList<Region> lateral;
+    private ArrayList<Tipo> arriba; 
 
     private ArrayList<String> lateralNombre;
     private ArrayList<String> arribaNombre; 
@@ -51,7 +51,10 @@ public class JuegoService {
     }
 
     public HashMap<Integer , List<String>> crearJuego() {
-        
+
+        lateral = new ArrayList<>();
+        arriba = new ArrayList<>(); 
+
         HashMap<Integer , List<String>> juego = new HashMap<>(); //hasmap donde el integer es la posicion en la matriz y list<String> es la lista de los nombres pokemons
 
 
