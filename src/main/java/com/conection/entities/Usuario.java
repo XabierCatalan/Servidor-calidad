@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Usuario {
 
     @Id
-    private int ID;
+    private int id;
 
     private String Correo;
     private String Contra;
