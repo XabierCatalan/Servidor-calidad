@@ -3,10 +3,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.conection.entities.Region;
 import com.conection.entities.Tipo;
+import com.conection.entities.Usuario;
 import com.conection.repository.PokemonRepository;
 import com.conection.repository.RegionRepository;
 import com.conection.repository.TipoRepository;
+import com.conection.repository.UsuarioRepository;
 import com.conection.services.JuegoService;
+import com.conection.services.UsuarioService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +17,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -28,6 +32,10 @@ public class APIController {
 	private TipoRepository tipoRepository;
 	@Autowired
 	private RegionRepository regionRepository;
+    @Autowired
+	private UsuarioRepository UsuarioRepository;
+    @Autowired
+	private UsuarioService UsuarioService;
 
     @RequestMapping("/test")
     public String holaMundo() {
@@ -96,6 +104,40 @@ public class APIController {
 
         return lista;
     }
+ 
+    //dependiendo del mensaje que le llegue al cliente pasara una cosa en la ventana de registro u otra
+    @RequestMapping("/registrar")
+    public String registrar(@RequestParam (name = "correo") String correo,
+                                    @RequestParam (name = "contra") String contra) {
+        System.out.println(correo + " " + contra);
+        boolean existe = UsuarioService.checkUsuarioByCorreoContra(correo, contra);
+        String mensaje;
+        if (!existe) {
+            Usuario usuario = new Usuario();
+            usuario.setCorreo(correo);
+            usuario.setContra(contra);
+            usuario.setNivel(1);
+            UsuarioRepository.save(usuario); //suponemos que el save lo mete dentro de la bd
+            mensaje = "Usuario registrado";
+            return mensaje;
+        }
+        mensaje = "Usuario ya Existe";
+        return mensaje;
+    }
+
+    @RequestMapping("/iniciarSesion")
+    public boolean iniciarSesion(@RequestParam (name = "correo") String correo,
+                                    @RequestParam (name = "contra") String contra) {
+        boolean existe = UsuarioService.checkUsuarioByCorreoContra(correo, contra);
+        if (existe) {
+           
+            return true;
+        }
+        
+        return false;
+    }
+
+    
 
 
     

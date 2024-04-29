@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 
 @RunWith(MockitoJUnitRunner.class)
-
 public class PokemonTest {
     @Mock
     private Pokemon pokemon1;
