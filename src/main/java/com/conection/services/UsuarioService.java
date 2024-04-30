@@ -31,4 +31,23 @@ public class UsuarioService {
 
         return false;
     }
+
+    public boolean insertUsuario(String correo, String contra, Integer nivel) {
+        String sql = "INSERT INTO Usuarios (Correo, Contra, Nivel) VALUES (?, ?, ?)";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, correo);
+            statement.setString(2, contra);
+            statement.setInt(3, nivel);
+
+            int rowsAffected = statement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

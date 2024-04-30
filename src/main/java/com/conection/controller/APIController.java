@@ -111,15 +111,20 @@ public class APIController {
                                     @RequestParam (name = "contra") String contra) {
         System.out.println(correo + " " + contra);
         boolean existe = UsuarioService.checkUsuarioByCorreoContra(correo, contra);
+        System.out.println(existe);
         String mensaje;
         if (!existe) {
-            Usuario usuario = new Usuario();
-            usuario.setCorreo(correo);
-            usuario.setContra(contra);
-            usuario.setNivel(1);
-            UsuarioRepository.save(usuario); //suponemos que el save lo mete dentro de la bd
-            mensaje = "Usuario registrado";
-            return mensaje;
+           
+            boolean metido = UsuarioService.insertUsuario(correo, contra, 1); //nivel 1 por defecto
+
+            if (metido) {
+                mensaje = "Usuario registrado";
+                return mensaje;
+            } else {
+                mensaje = "Error al registrar";
+                return mensaje;
+            }
+           
         }
         mensaje = "Usuario ya Existe";
         return mensaje;
