@@ -9,6 +9,8 @@ import com.conection.repository.RegionRepository;
 import com.conection.repository.TipoRepository;
 import com.conection.repository.UsuarioRepository;
 import com.conection.services.JuegoService;
+import com.conection.services.RegionService;
+import com.conection.services.TipoService;
 import com.conection.services.UsuarioService;
 
 import java.util.ArrayList;
@@ -36,6 +38,10 @@ public class APIController {
 	private UsuarioRepository UsuarioRepository;
     @Autowired
 	private UsuarioService UsuarioService;
+    @Autowired
+	private RegionService RegionService;
+    @Autowired
+	private TipoService TipoService;
 
     @RequestMapping("/test")
     public String holaMundo() {
@@ -93,12 +99,36 @@ public class APIController {
         return lista;
     }
 
+    @RequestMapping("/listatiposNombres")
+    public ArrayList<String> listatiposNombres() {
+        ArrayList<String> lista = new ArrayList<String>();
+
+        tipoRepository.findAll().forEach(tipo ->{
+            lista.add(tipo.getTipo());
+
+        });
+
+        return lista;
+    }
+
     @RequestMapping("/listar")
     public ArrayList<Region> listar() {
         ArrayList<Region> lista = new ArrayList<Region>();
 
         regionRepository.findAll().forEach(region ->{
             lista.add(region);
+
+        });
+
+        return lista;
+    }
+
+    @RequestMapping("/listaregionNombres")
+    public ArrayList<String> listaregionNombres() {
+        ArrayList<String> lista = new ArrayList<String>();
+
+        regionRepository.findAll().forEach(region ->{
+            lista.add(region.getRegion());
 
         });
 
@@ -131,16 +161,76 @@ public class APIController {
     }
 
     @RequestMapping("/iniciarSesion")
-    public boolean iniciarSesion(@RequestParam (name = "correo") String correo,
+    public String iniciarSesion(@RequestParam (name = "correo") String correo,
                                     @RequestParam (name = "contra") String contra) {
+        Usuario user = UsuarioService.getUsuarioByCorreoContra(correo, contra);
+        String mensaje = "";
+        if (user == null) {
+           mensaje = "Usuario no existe";
+        } else if (user.getNivel() == 1) {
+            mensaje = "Jugador";
+        } else  if (user.getNivel() == 2){
+            mensaje = "Admin";
+        }
+
+        return mensaje;
+        
+    }
+
+    @RequestMapping("/InsertRegion")
+    public String InsertRegion(@RequestParam (name = "region") String region) {
+        
+        boolean metido = RegionService.insertRegion(region);
+        String mensaje;
+        if (metido) {
+            mensaje = "Region registrada";
+            return mensaje;
+        } else {
+            mensaje = "Error al insertar";
+            return mensaje;
+        }
+    }
+
+    @RequestMapping("/InsertTipo")
+    public String InsertTipo(@RequestParam (name = "tipo") String Tipo) {
+        
+        boolean metido = TipoService.InsertTipo(Tipo);
+        String mensaje;
+        if (metido) {
+            mensaje = "Region registrada";
+            return mensaje;
+        } else {
+            mensaje = "Error al insertar";
+            return mensaje;
+        }
+    }
+
+    @RequestMapping("/InsertUsuario")
+    public String InsertUsuario(@RequestParam (name = "Correo") String correo,
+                                @RequestParam (name = "Contra") String contra,
+                                @RequestParam (name = "nivel") String nivel) {
+
         boolean existe = UsuarioService.checkUsuarioByCorreoContra(correo, contra);
-        if (existe) {
-           
-            return true;
+        
+        if (!existe) {
+            boolean metido = UsuarioService.insertUsuario(correo, contra, Integer.parseInt(nivel));
+            String mensaje;
+            if (metido) {
+                mensaje = "Usuario Insertado";
+                return mensaje;
+            } else {
+                mensaje = "Error al insertar el Usuaruo desde el admin";
+                return mensaje;
+            }
+        } else {
+            return "Usuario ya existe";
+            
         }
         
-        return false;
+        
     }
+
+
 
     
 

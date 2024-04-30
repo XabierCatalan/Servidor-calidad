@@ -14,7 +14,7 @@ GRANT ALL PRIVILEGES ON pokedokuDB.* TO 'opled'@'localhost' IDENTIFIED BY 'opled
 
 
 CREATE TABLE Usuarios (     
-    Id INT PRIMARY KEY,     
+    Id INT PRIMARY KEY AUTO_INCREMENT,     
     Correo VARCHAR(255),     
     Contra VARCHAR(255),     
     Nivel INT 
@@ -23,13 +23,13 @@ CREATE TABLE Usuarios (
 
 -- Crear la tabla Regiones
 CREATE TABLE Regiones (
-    Id INT PRIMARY KEY,
+    Id INT PRIMARY KEY AUTO_INCREMENT,   
     Nombre VARCHAR(255)
 );
 
 -- Crear la tabla Tipos
 CREATE TABLE Tipos (
-    Id INT PRIMARY KEY,
+    Id INT PRIMARY KEY AUTO_INCREMENT,   
     Nombre VARCHAR(255)
 );
 

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.conection.entities.Usuario;
+
 @Service
 public class UsuarioService {
     
@@ -49,5 +51,31 @@ public class UsuarioService {
         }
 
         return false;
+    }
+
+
+    public Usuario getUsuarioByCorreoContra(String correo, String contra) {
+        String sql = "SELECT * FROM Usuarios WHERE Correo = ? AND Contra = ?";
+        Usuario usuario = null;
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, correo);
+            statement.setString(2, contra);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                usuario = new Usuario();
+                usuario.setId(resultSet.getInt("Id"));
+                usuario.setCorreo(resultSet.getString("Correo"));
+                usuario.setContra(resultSet.getString("Contra"));
+                usuario.setNivel(resultSet.getInt("Nivel"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuario;
     }
 }
