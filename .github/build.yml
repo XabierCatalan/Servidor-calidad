@@ -1,10 +1,7 @@
 name: SonarCloud
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:  [push] 
+
 jobs:
   build:
     name: Build and analyze
@@ -19,8 +16,17 @@ jobs:
           java-version: 17
           distribution: 'zulu' # Alternative distribution options are available.
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Build with Maven
-      run: ls -la && pwd && mvn test -DargLine="-Dcontiperf.active=false" 
+        run: mvn --batch-mode --update-snapshots package
+
+      - name: Build with Maven
+        run: ls -la && pwd && mvn test -DargLine="-Dcontiperf.active=false" 
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
