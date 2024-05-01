@@ -1,7 +1,5 @@
 package com.conection.config;
 
-
-
 import javax.sql.DataSource;
 
 
@@ -15,9 +13,11 @@ public class DatasourceConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.sqlite.JDBC");
-        dataSource.setUrl("jdbc:sqlite:pokemonBD.db");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/pokedokuDB");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
         return dataSource;
     }
-    
+
 }

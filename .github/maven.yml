@@ -1,0 +1,31 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+# Indicate this flag to avoid running performance tests continously: -DargLine="-Dcontiperf.active=false"
+name: SonarCloud
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+
+    name: Build and Analyze
+    runs-on: ubuntu-latest
+
+    steps: 
+    - uses: actions/checkout@v3
+    with:
+      fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: ls -la && pwd && mvn test -DargLine="-Dcontiperf.active=false" 
