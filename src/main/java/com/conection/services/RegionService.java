@@ -33,6 +33,28 @@ public class RegionService {
         return false;
     }
 
+    public int getIDRegionByName(String Region) {
+        String sql = "SELECT Id FROM Regiones WHERE Nombre = ?";
+        int id = -1;
 
-  
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, Region);
+          
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                id = resultSet.getInt("Id");
+            }
+
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+
+
+    }
 }

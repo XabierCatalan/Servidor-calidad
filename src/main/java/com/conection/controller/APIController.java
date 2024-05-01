@@ -9,6 +9,7 @@ import com.conection.repository.RegionRepository;
 import com.conection.repository.TipoRepository;
 import com.conection.repository.UsuarioRepository;
 import com.conection.services.JuegoService;
+import com.conection.services.PokemonService;
 import com.conection.services.RegionService;
 import com.conection.services.TipoService;
 import com.conection.services.UsuarioService;
@@ -42,6 +43,8 @@ public class APIController {
 	private RegionService RegionService;
     @Autowired
 	private TipoService TipoService;
+    @Autowired
+	private PokemonService PokemonService;
 
     @RequestMapping("/test")
     public String holaMundo() {
@@ -228,6 +231,32 @@ public class APIController {
         }
         
         
+    }
+
+    @RequestMapping("/InsertPokemon")
+    public String InsertPokemon(@RequestParam (name = "nombre") String nombre,
+                                @RequestParam (name = "tipo1") String tipo1,
+                                @RequestParam (name = "tipo2") String tipo2,
+                                @RequestParam (name = "region") String region) {
+        
+        int tipo1_ = TipoService.getIDTipoByName(tipo1);
+        int tipo2_ = TipoService.getIDTipoByName(tipo2);
+        int region_ = RegionService.getIDRegionByName(region);
+        
+        System.out.println(nombre + " " + tipo1_ + " " + tipo2_ + " " + region_);
+        
+        boolean metido = PokemonService.insertPokemon(nombre, tipo1_, tipo2_, region_);
+
+        System.out.println(metido);
+
+        String mensaje;
+        if (metido) {
+            mensaje = "Pokemon Insertado";
+            return mensaje;
+        } else {
+            mensaje = "Error al insertar el Pokemon desde el admin";
+            return mensaje;
+        }
     }
 
 
