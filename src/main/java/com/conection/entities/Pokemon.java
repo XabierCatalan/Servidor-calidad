@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//prueba
+//prueba 2
 @Getter
 @Setter
 @AllArgsConstructor
