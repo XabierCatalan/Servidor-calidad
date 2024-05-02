@@ -75,25 +75,26 @@ public class APIControllerTest {
         Usuario usuario2 = new Usuario(2, "unai2", "unai2", 2);
         Usuario usuario3 = new Usuario(3, "unai3", "unai3", 3);
 
-
+       
+        when(usuarioService.checkUsuarioByCorreoContra("jonan", "jonan")).thenReturn(true);
+        when(usuarioService.checkUsuarioByCorreoContra("jonan1", "jonan1")).thenReturn(false);
+        when(usuarioService.checkUsuarioByCorreoContra("jonan2", "jonan2")).thenReturn(false);
+        when(usuarioService.insertUsuario("jonan1", "jonan1", 1)).thenReturn(true);
+        when(usuarioService.insertUsuario("jonan2", "jonan2", 1)).thenReturn(false);
         
+        when(usuarioService.insertUsuario("jonan2", "jonan2", 1)).thenReturn(false);
 
         when(tipoService.InsertTipo("Elemento1")).thenReturn(true);
         when(tipoService.InsertTipo("Elemento2")).thenReturn(false);
         when(regionService.insertRegion("Espanya")).thenReturn(true);
         when(regionService.insertRegion("Francia")).thenReturn(false);
-
         when(usuarioService.getUsuarioByCorreoContra("unai", "unai")).thenReturn(null);
         when(usuarioService.getUsuarioByCorreoContra("unai1", "unai1")).thenReturn(usuario1);
         when(usuarioService.getUsuarioByCorreoContra("unai2", "unai2")).thenReturn(usuario2);
         when(usuarioService.getUsuarioByCorreoContra("unai3", "unai3")).thenReturn(usuario3);
         when(usuarioService.checkUsuarioByCorreoContra("xabi", "xabi")).thenReturn(true);
-        when(usuarioService.checkUsuarioByCorreoContra("xabi1", "xabi1")).thenReturn(true);
         when(usuarioService.checkUsuarioByCorreoContra("oscar", "oscar")).thenReturn(false);
         when(usuarioService.checkUsuarioByCorreoContra("oscar1", "oscar1")).thenReturn(false);
-
-        when(usuarioService.insertUsuario("xabi1", "xabi1", 1)).thenReturn(false);
-        when(usuarioService.insertUsuario("xabi", "xabi", 1)).thenReturn(true);
         when(usuarioService.insertUsuario("oscar", "oscar", 1)).thenReturn(true);
         when(usuarioService.insertUsuario("oscar1", "oscar1", 1)).thenReturn(false);
         when(regionRepository.findAll()).thenReturn(mockRegiones);
@@ -276,8 +277,6 @@ public class APIControllerTest {
         assertEquals("Error al insertar", result1);
 
 
-
-
     }
 
     @Test
@@ -298,25 +297,37 @@ public class APIControllerTest {
     @Test
     public void testInsertUsuario() {
 
-        String result = apiController.InsertUsuario("xabi", "xabi", "1");
-        verify(usuarioService).checkUsuarioByCorreoContra("xabi", "xabi");
-        verify(usuarioService).insertUsuario("xabi", "xabi", 1);
-        assertEquals("Usuario Insertado", result);
+        String result = apiController.InsertUsuario("jonan", "jonan", "1");
+        verify(usuarioService).checkUsuarioByCorreoContra("jonan", "jonan");
 
-        String result1 = apiController.InsertUsuario("xabi1", "xabi1", "1");
-        verify(usuarioService).checkUsuarioByCorreoContra("xabi1", "xabi1");
-        verify(usuarioService).insertUsuario("xabi1", "xabi1", 1);
-        assertEquals("Error al insertar el Usuaruo desde el admin", result1);
+        assertEquals("Usuario ya existe", result);
 
-        String result2 = apiController.InsertUsuario("oscar1", "oscar1", "1");
-        verify(usuarioService).checkUsuarioByCorreoContra("oscar1", "oscar1");
-        assertEquals("Usuario ya existe", result2);
+        String result1 = apiController.InsertUsuario("jonan1", "jonan1", "1");
+        verify(usuarioService).checkUsuarioByCorreoContra("jonan1", "jonan1");
+        verify(usuarioService).insertUsuario("jonan1", "jonan1", 1);
 
+        assertEquals("Usuario Insertado", result1);
 
+        String result2 = apiController.InsertUsuario("jonan2", "jonan2", "1");
+        verify(usuarioService).checkUsuarioByCorreoContra("jonan2", "jonan2");
+        verify(usuarioService).insertUsuario("jonan2", "jonan2", 1);
+
+        assertEquals("Error al insertar el Usuaruo desde el admin", result2);
+
+        
         
 
     }
 
-    
-    
+
+    @Test
+    public void testInsertPokemon() {
+
+
+
+
+    }
+
+
+
 }

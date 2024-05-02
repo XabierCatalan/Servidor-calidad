@@ -242,11 +242,11 @@ public class APIController {
         int tipo2_ = tipoService.getIDTipoByName(tipo2);
         int region_ = regionService.getIDRegionByName(region);
         
-        System.out.println(nombre + " " + tipo1_ + " " + tipo2_ + " " + region_);
+       
         
         boolean metido = pokemonService.insertPokemon(nombre, tipo1_, tipo2_, region_);
 
-        System.out.println(metido);
+        
 
         String mensaje;
         if (metido) {
