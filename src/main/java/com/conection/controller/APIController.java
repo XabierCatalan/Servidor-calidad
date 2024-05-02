@@ -199,7 +199,7 @@ public class APIController {
         boolean metido = tipoService.InsertTipo(Tipo);
         String mensaje;
         if (metido) {
-            mensaje = "Region registrada";
+            mensaje = "Tipo registrado";
             return mensaje;
         } else {
             mensaje = "Error al insertar";

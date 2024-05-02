@@ -76,16 +76,24 @@ public class APIControllerTest {
         Usuario usuario3 = new Usuario(3, "unai3", "unai3", 3);
 
 
+        
 
+        when(tipoService.InsertTipo("Elemento1")).thenReturn(true);
+        when(tipoService.InsertTipo("Elemento2")).thenReturn(false);
         when(regionService.insertRegion("Espanya")).thenReturn(true);
         when(regionService.insertRegion("Francia")).thenReturn(false);
+
         when(usuarioService.getUsuarioByCorreoContra("unai", "unai")).thenReturn(null);
         when(usuarioService.getUsuarioByCorreoContra("unai1", "unai1")).thenReturn(usuario1);
         when(usuarioService.getUsuarioByCorreoContra("unai2", "unai2")).thenReturn(usuario2);
         when(usuarioService.getUsuarioByCorreoContra("unai3", "unai3")).thenReturn(usuario3);
         when(usuarioService.checkUsuarioByCorreoContra("xabi", "xabi")).thenReturn(true);
+        when(usuarioService.checkUsuarioByCorreoContra("xabi1", "xabi1")).thenReturn(true);
         when(usuarioService.checkUsuarioByCorreoContra("oscar", "oscar")).thenReturn(false);
         when(usuarioService.checkUsuarioByCorreoContra("oscar1", "oscar1")).thenReturn(false);
+
+        when(usuarioService.insertUsuario("xabi1", "xabi1", 1)).thenReturn(false);
+        when(usuarioService.insertUsuario("xabi", "xabi", 1)).thenReturn(true);
         when(usuarioService.insertUsuario("oscar", "oscar", 1)).thenReturn(true);
         when(usuarioService.insertUsuario("oscar1", "oscar1", 1)).thenReturn(false);
         when(regionRepository.findAll()).thenReturn(mockRegiones);
@@ -269,6 +277,43 @@ public class APIControllerTest {
 
 
 
+
+    }
+
+    @Test
+    public void testInsertTipo() {
+
+        String result = apiController.InsertTipo("Elemento1");
+        verify(tipoService).InsertTipo("Elemento1");
+
+        assertEquals("Tipo registrado", result);
+
+        String result1 = apiController.InsertTipo("Elemento2");
+        verify(tipoService).InsertTipo("Elemento2");
+
+        assertEquals("Error al insertar", result1);
+
+    }
+
+    @Test
+    public void testInsertUsuario() {
+
+        String result = apiController.InsertUsuario("xabi", "xabi", "1");
+        verify(usuarioService).checkUsuarioByCorreoContra("xabi", "xabi");
+        verify(usuarioService).insertUsuario("xabi", "xabi", 1);
+        assertEquals("Usuario Insertado", result);
+
+        String result1 = apiController.InsertUsuario("xabi1", "xabi1", "1");
+        verify(usuarioService).checkUsuarioByCorreoContra("xabi1", "xabi1");
+        verify(usuarioService).insertUsuario("xabi1", "xabi1", 1);
+        assertEquals("Error al insertar el Usuaruo desde el admin", result1);
+
+        String result2 = apiController.InsertUsuario("oscar1", "oscar1", "1");
+        verify(usuarioService).checkUsuarioByCorreoContra("oscar1", "oscar1");
+        assertEquals("Usuario ya existe", result2);
+
+
+        
 
     }
 

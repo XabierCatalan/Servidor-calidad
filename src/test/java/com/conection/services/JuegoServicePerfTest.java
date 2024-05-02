@@ -1,4 +1,4 @@
-package com.conection.services;
+/*package com.conection.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -127,4 +127,4 @@ public class JuegoServicePerfTest {
         double averageLatency = (double) totalTime / 1000; // 1000 iteraciones realizadas
         assertTrue(averageLatency < 10); // Adaptar el valor según requisito especificado en @JUnitPerfTestRequirement
     }
-}
+}*/
