@@ -59,6 +59,26 @@ public class RegionService {
 
         return id;
 
-
+    
     }
+
+    /*public boolean updateRegion(String oldName, String newName) {
+        boolean result = false;
+        String sql = "UPDATE Regiones SET Nombre = ? WHERE Nombre = ?";
+    
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, newName);
+            statement.setString(2, oldName);
+    
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return result;
+    }*/
 }
