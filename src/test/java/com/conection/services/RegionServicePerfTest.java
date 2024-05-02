@@ -60,4 +60,27 @@ public class RegionServicePerfTest {
         assertTrue(averageLatency < 30); // Adaptar el valor según requisito especificado en @JUnitPerfTestRequirement
     }
 
+/*@Test
+@JUnitPerfTest(threads = 20, durationMs = 3000)
+@JUnitPerfTestRequirement(meanLatency = 50)
+public void testUpdateRegion_Performance() throws Exception {
+    RegionService regionService = new RegionService();
+
+    String oldRegionName = "Nueva región";
+    String newRegionName = "Región Actualizada";
+
+    regionService.insertRegion(oldRegionName); // Insertar la región antes de actualizarla
+
+    long startTime = System.currentTimeMillis();
+    for (int i = 0; i < 100; i++) {
+        boolean actualizado = regionService.updateRegion(oldRegionName, newRegionName);
+        assertTrue(actualizado);
+    }
+    long endTime = System.currentTimeMillis();
+
+    long totalTime = endTime - startTime;
+    double averageLatency = (double) totalTime / 100;
+    assertTrue(averageLatency < 50);
+}*/
+
 }
