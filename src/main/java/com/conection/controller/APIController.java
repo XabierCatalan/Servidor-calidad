@@ -36,15 +36,15 @@ public class APIController {
 	@Autowired
 	private RegionRepository regionRepository;
     @Autowired
-	private UsuarioRepository UsuarioRepository;
+	private UsuarioRepository usuarioRepository;
     @Autowired
-	private UsuarioService UsuarioService;
+	private UsuarioService usuarioService;
     @Autowired
-	private RegionService RegionService;
+	private RegionService regionService;
     @Autowired
-	private TipoService TipoService;
+	private TipoService tipoService;
     @Autowired
-	private PokemonService PokemonService;
+	private PokemonService pokemonService;
 
     @RequestMapping("/test")
     public String holaMundo() {
@@ -142,13 +142,12 @@ public class APIController {
     @RequestMapping("/registrar")
     public String registrar(@RequestParam (name = "correo") String correo,
                                     @RequestParam (name = "contra") String contra) {
-        System.out.println(correo + " " + contra);
-        boolean existe = UsuarioService.checkUsuarioByCorreoContra(correo, contra);
-        System.out.println(existe);
+        
+        boolean existe = usuarioService.checkUsuarioByCorreoContra(correo, contra);
         String mensaje;
         if (!existe) {
            
-            boolean metido = UsuarioService.insertUsuario(correo, contra, 1); //nivel 1 por defecto
+            boolean metido = usuarioService.insertUsuario(correo, contra, 1); //nivel 1 por defecto
 
             if (metido) {
                 mensaje = "Usuario registrado";
@@ -166,7 +165,7 @@ public class APIController {
     @RequestMapping("/iniciarSesion")
     public String iniciarSesion(@RequestParam (name = "correo") String correo,
                                     @RequestParam (name = "contra") String contra) {
-        Usuario user = UsuarioService.getUsuarioByCorreoContra(correo, contra);
+        Usuario user = usuarioService.getUsuarioByCorreoContra(correo, contra);
         String mensaje = "";
         if (user == null) {
            mensaje = "Usuario no existe";
@@ -183,7 +182,7 @@ public class APIController {
     @RequestMapping("/InsertRegion")
     public String InsertRegion(@RequestParam (name = "region") String region) {
         
-        boolean metido = RegionService.insertRegion(region);
+        boolean metido = regionService.insertRegion(region);
         String mensaje;
         if (metido) {
             mensaje = "Region registrada";
@@ -197,7 +196,7 @@ public class APIController {
     @RequestMapping("/InsertTipo")
     public String InsertTipo(@RequestParam (name = "tipo") String Tipo) {
         
-        boolean metido = TipoService.InsertTipo(Tipo);
+        boolean metido = tipoService.InsertTipo(Tipo);
         String mensaje;
         if (metido) {
             mensaje = "Region registrada";
@@ -213,10 +212,10 @@ public class APIController {
                                 @RequestParam (name = "Contra") String contra,
                                 @RequestParam (name = "nivel") String nivel) {
 
-        boolean existe = UsuarioService.checkUsuarioByCorreoContra(correo, contra);
+        boolean existe = usuarioService.checkUsuarioByCorreoContra(correo, contra);
         
         if (!existe) {
-            boolean metido = UsuarioService.insertUsuario(correo, contra, Integer.parseInt(nivel));
+            boolean metido = usuarioService.insertUsuario(correo, contra, Integer.parseInt(nivel));
             String mensaje;
             if (metido) {
                 mensaje = "Usuario Insertado";
@@ -239,13 +238,13 @@ public class APIController {
                                 @RequestParam (name = "tipo2") String tipo2,
                                 @RequestParam (name = "region") String region) {
         
-        int tipo1_ = TipoService.getIDTipoByName(tipo1);
-        int tipo2_ = TipoService.getIDTipoByName(tipo2);
-        int region_ = RegionService.getIDRegionByName(region);
+        int tipo1_ = tipoService.getIDTipoByName(tipo1);
+        int tipo2_ = tipoService.getIDTipoByName(tipo2);
+        int region_ = regionService.getIDRegionByName(region);
         
         System.out.println(nombre + " " + tipo1_ + " " + tipo2_ + " " + region_);
         
-        boolean metido = PokemonService.insertPokemon(nombre, tipo1_, tipo2_, region_);
+        boolean metido = pokemonService.insertPokemon(nombre, tipo1_, tipo2_, region_);
 
         System.out.println(metido);
 
