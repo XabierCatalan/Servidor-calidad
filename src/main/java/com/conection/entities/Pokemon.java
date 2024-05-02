@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//prueba
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 
 @Entity
 @Table(name = "Pokemons")
