@@ -1,6 +1,6 @@
 **README.md**
 
-# Aplicación con Maven, Spring Boot y SQLite
+# Aplicación con Maven, Spring Boot y MySQL
 
 Este repositorio contiene una aplicación que utiliza tecnologías como Maven, Spring Boot y SQLite. A continuación, se proporciona una descripción de cada una de estas tecnologías y cómo se utilizan en conjunto en este proyecto.
 
