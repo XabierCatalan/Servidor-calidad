@@ -14,8 +14,10 @@ import com.conection.entities.Usuario;
 @Service
 public class RegionService {
     
+
    
     public boolean insertRegion(String Region) {
+        boolean result = false;
         String sql = "INSERT INTO Regiones (Nombre) VALUES (?)";
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
@@ -24,13 +26,15 @@ public class RegionService {
           
 
             int rowsAffected = statement.executeUpdate();
-
-            return rowsAffected > 0;
+            if(rowsAffected > 0){
+                result = true;
+            }
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return result;
     }
 
     public int getIDRegionByName(String Region) {
@@ -55,6 +59,26 @@ public class RegionService {
 
         return id;
 
-
+    
     }
+
+    /*public boolean updateRegion(String oldName, String newName) {
+        boolean result = false;
+        String sql = "UPDATE Regiones SET Nombre = ? WHERE Nombre = ?";
+    
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, newName);
+            statement.setString(2, oldName);
+    
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return result;
+    }*/
 }

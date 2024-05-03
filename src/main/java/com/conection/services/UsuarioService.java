@@ -7,12 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.conection.entities.Usuario;
+import com.conection.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired // Anotación para inyección de dependencias por método
+    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
     
     public boolean checkUsuarioByCorreoContra(String Correo, String contra) {
         String sql = "SELECT * FROM Usuarios WHERE Correo = ? AND Contra = ?";
