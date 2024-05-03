@@ -29,8 +29,8 @@ Para ejecutar el proyecto, puedes seguir estos pasos:
 4. Ejecuta el comando mysql -u root -p root
 5. Ejecuta el comando source sql/pokedokuDB.sql
 6. ejecuta comando exit
-4. Ejecuta el comando `mvn spring-boot:run`.
-5. La aplicación se ejecutará y estará disponible en `http://localhost:8080`.
+7. Ejecuta el comando `mvn spring-boot:run`.
+8. La aplicación se ejecutará y estará disponible en `http://localhost:8080`.
 
 ## Ejecución de Tests
 
@@ -42,8 +42,8 @@ Para ejecutar el proyecto, puedes seguir estos pasos:
 4. Ejecuta el comando mysql -u root -p root
 5. Ejecuta el comando source sql/pokedokuDB.sql
 6. ejecuta comando exit
-4. Ejecuta el comando `mvn test`.
-5. los resultados de los tests seran comprobables en jacoco
+7. Ejecuta el comando `mvn test`.
+8. los resultados de los tests seran comprobables en jacoco
 
 
 
