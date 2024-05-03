@@ -9,15 +9,18 @@ import java.util.Optional;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
 
+import com.conection.categories.PerformanceTest;
 import com.conection.entities.Usuario;
 import com.conection.repository.UsuarioRepository;
 import com.github.noconnor.junitperf.JUnitPerfTest;
 import com.github.noconnor.junitperf.JUnitPerfTestRequirement;
 import com.github.noconnor.junitperf.reporting.providers.ConsoleReportGenerator;
 
+@Category(PerformanceTest.class)
 public class UsuarioServicePerfTest {
 
     public UsuarioRepository usuarioRepository;

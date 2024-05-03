@@ -105,7 +105,7 @@ public class JuegoService {
                     listaPokemons.add("NINGUNO");
                 }
 
-               System.out.println(listaPokemons.get(0).toString());
+               
                 juego.put(juego.size() + 1 , listaPokemons);
                 
             }
@@ -118,7 +118,7 @@ public class JuegoService {
     }
 
     public List<String> getCondicionesTipo(){
-        System.out.println(arribaNombre);
+        
         return arribaNombre;
     }
 

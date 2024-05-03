@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import org.junit.Before;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.conection.categories.PerformanceTest;
 import com.conection.entities.Pokemon;
 import com.conection.entities.Usuario;
 import com.conection.repository.UsuarioRepository;
@@ -28,6 +30,7 @@ import com.conection.services.UsuarioService;
 
 import jakarta.inject.Inject;
 
+@Category(PerformanceTest.class)
 @RunWith(MockitoJUnitRunner.class)
 public class UsuarioServiceTest {
 

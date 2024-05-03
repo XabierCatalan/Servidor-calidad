@@ -3,10 +3,13 @@ package com.conection.services;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import com.conection.categories.PerformanceTest;
 import com.github.noconnor.junitperf.JUnitPerfTest;
 import com.github.noconnor.junitperf.JUnitPerfTestRequirement;
 
+@Category(PerformanceTest.class)
 public class RegionServicePerfTest {
     @Test
     @JUnitPerfTest(threads = 20, durationMs = 3000)

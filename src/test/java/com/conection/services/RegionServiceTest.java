@@ -2,10 +2,12 @@ package com.conection.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import com.conection.categories.IntegrationTest;
 import com.conection.entities.Region;
 import com.conection.entities.Usuario;
 import com.conection.repository.RegionRepository;
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 
-
+@Category(IntegrationTest.class)
 @RunWith(MockitoJUnitRunner.class)
 public class RegionServiceTest {
     
