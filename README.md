@@ -14,17 +14,36 @@ Este repositorio contiene una aplicación que utiliza tecnologías como Maven, S
 
 [Spring Boot](https://spring.io/projects/spring-boot) es un framework de Spring que facilita la creación de aplicaciones Java/JVM con una configuración mínima. Proporciona una forma rápida y sencilla de crear aplicaciones autónomas y listas para producir. Spring Boot incluye incorporadas muchas dependencias comunes y proporciona una configuración predeterminada sensata para tus aplicaciones.
 
-### SQLite
-
-[SQLite](https://www.sqlite.org/) es una biblioteca de software que proporciona una base de datos relacional ligera. A diferencia de otros sistemas de gestión de bases de datos como MySQL o PostgreSQL, SQLite no requiere un servidor separado y se almacena en un solo archivo de disco. Es ideal para aplicaciones que requieren una base de datos local sin la complejidad de un servidor de base de datos.
 
 ## Descripción del Proyecto
 
-Este proyecto es una aplicación de ejemplo que utiliza Maven para gestionar las dependencias y construir el proyecto, Spring Boot para la creación de la aplicación y SQLite como base de datos. 
+Este proyecto es una aplicación de ejemplo que utiliza Maven para gestionar las dependencias y construir el proyecto, Spring Boot para la creación de la aplicación y MySQL como base de datos. 
 
 ## Ejecución del Proyecto
 
 Para ejecutar el proyecto, puedes seguir estos pasos:
+
+1. Clona el repositorio a tu máquina local.
+2. Asegúrate de tener Maven instalado.
+3. Abre una terminal y navega hasta el directorio raíz del proyecto.
+4. Ejecuta el comando mysql -u root -p root
+5. Ejecuta el comando source sql/pokedokuDB.sql
+6. ejecuta comando exit
+4. Ejecuta el comando `mvn spring-boot:run`.
+5. La aplicación se ejecutará y estará disponible en `http://localhost:8080`.
+
+## Ejecución de Tests
+
+Para ejecutar el proyecto, puedes seguir estos pasos:
+
+1. Clona el repositorio a tu máquina local.
+2. Asegúrate de tener Maven instalado.
+3. Abre una terminal y navega hasta el directorio raíz del proyecto.
+4. Ejecuta el comando mysql -u root -p root
+5. Ejecuta el comando source sql/pokedokuDB.sql
+6. ejecuta comando exit
+4. Ejecuta el comando `mvn test`.
+5. los resultados de los tests seran comprobables en jacoco
 
 1. Clona el repositorio a tu máquina local.
 2. Asegúrate de tener Maven instalado.
