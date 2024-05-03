@@ -10,7 +10,7 @@ CREATE USER IF NOT EXISTS 'opled'@'localhost' IDENTIFIED BY 'opled';
 USE pokedokuDB;
 
 GRANT ALL ON pokedokuDB.* TO 'spq'@'localhost';
-GRANT ALL PRIVILEGES ON pokedokuDB.* TO 'opled'@'localhost' IDENTIFIED BY 'opled' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON pokedokuDB.* TO 'opled'@'localhost' IDENTIFIED BY 'opled';
 
 
 CREATE TABLE Usuarios (     
