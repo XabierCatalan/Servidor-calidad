@@ -1,4 +1,14 @@
-/*package com.conection.services;
+package com.conection.services;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,24 +17,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import com.conection.categories.IntegrationTest;
+import com.conection.categories.PerformanceTest;
 import com.conection.entities.Pokemon;
 import com.conection.repository.PokemonRepository;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.junit.runner.RunWith;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-@Category(IntegrationTest.class)
-@RunWith(MockitoJUnitRunner.class)
+@Category(PerformanceTest.class)
 public class PokemonServiceTest {
 
     @InjectMocks
@@ -41,7 +38,6 @@ public class PokemonServiceTest {
     @Before
     public void setUp() {
         pokemonService = new PokemonService();
-        pokemonRepository = Mockito.mock(PokemonRepository.class);
 
         nombre = "Pikachu";
         tipo1 = 1; // Supongamos que 1 representa el tipo Eléctrico
@@ -49,23 +45,27 @@ public class PokemonServiceTest {
         region = 1; // Supongamos que 1 representa la región Kanto
 
         Pokemon pokemon = new Pokemon(1, nombre, tipo1, tipo2, region);
-        Mockito.when(pokemonRepository.save(Mockito.any(Pokemon.class))).thenReturn(pokemon);
+        when(pokemonRepository.save(Mockito.any(Pokemon.class))).thenReturn(pokemon);
+
+        // Simulamos el comportamiento de búsqueda por tipo y región
+        List<Pokemon> pokemonList = new ArrayList<>();
+        pokemonList.add(pokemon);
+        when(pokemonRepository.findAll()).thenReturn(pokemonList);
     }
 
-    @Test
-    public void insertPokemon() {
+    /*@Test
+    public void testInsertPokemon() {
         boolean result = pokemonService.insertPokemon(nombre, tipo1, tipo2, region);
         assertTrue(result);
-    }
+    }*/
 
-    
-    @Test
-    public void findPokemonByTypeAndRegion() {
-        boolean insertResult = pokemonService.insertPokemon(nombre, tipo1, tipo2, region);
-        assertTrue(insertResult);
+    /*@Test
+    public void testFindPokemonByTypeAndRegion() {
+        // Insertamos un Pokémon para que podamos probar la búsqueda
+        pokemonService.insertPokemon(nombre, tipo1, tipo2, region);
 
-        ArrayList<String> pokemonNames = pokemonService.FindPokemonByTypeAndRegion(tipo1, region);
+        List<String> pokemonNames = pokemonService.FindPokemonByTypeAndRegion(tipo1, region);
         assertNotNull(pokemonNames);
         assertTrue(pokemonNames.contains(nombre));
-    }
-}*/
+    }*/
+}
