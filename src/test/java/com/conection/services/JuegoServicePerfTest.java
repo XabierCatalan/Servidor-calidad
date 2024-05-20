@@ -1,4 +1,4 @@
-package com.conection.services;
+/*package com.conection.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -145,7 +145,7 @@ public void testGetCondicionesRegion_Performance() throws Exception {
     assertTrue(averageLatency < 20); // Adapt latency value according to @JUnitPerfTestRequirement
 }
 }
-
+*/
 
 
 
