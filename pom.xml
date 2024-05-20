@@ -24,6 +24,11 @@
 		<server.hostname>127.0.0.1</server.hostname>
 		<server.port>8080</server.port>
 		Hata aqui -->
+		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<server.hostname>127.0.0.1</server.hostname>
+		<server.port>8080</server.port>
+		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 	</properties>
 	<dependencies>
 
@@ -157,6 +162,15 @@
 							</includes>
 						</fileset>
 					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.soebes.maven.plugins</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
 				</configuration>
 			</plugin>
 
