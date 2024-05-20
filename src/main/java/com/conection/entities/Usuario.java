@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -20,6 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "Tipos")
 @PersistenceCapable
+
 public class Usuario {
 
     @Id
@@ -28,6 +30,16 @@ public class Usuario {
     private String Correo;
     private String Contra;
     private int Nivel;
+    
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", Correo='" + Correo + '\'' +
+                ", Contra='" + Contra + '\'' +
+                ", Nivel=" + Nivel +
+                '}';
+    }
 
     
 }
