@@ -1,4 +1,4 @@
-/*package com.conection.services;
+package com.conection.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.datanucleus.store.types.wrappers.HashMap;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -70,61 +71,82 @@ public class JuegoServicePerfTest {
     }
 
     @Test
-    @JUnitPerfTest(threads = 20, durationMs = 5000) // Adjust threads and duration as needed
-    @JUnitPerfTestRequirement(meanLatency = 300) // Adaptar el valor según rendimiento esperado
+    @JUnitPerfTest(threads = 20, durationMs = 3000)
+    @JUnitPerfTestRequirement(meanLatency = 50) // Ajustar valor de latencia según sea necesario
     public void testCrearJuegoPerformance() throws Exception {
-        // Mock PokemonService behavior to return empty lists efficiently
-        Pokemon p = new Pokemon();
-        ArrayList<String> al = new ArrayList<>();
-        al.add(p.getNombre());
-        Mockito.when(pokemonService.FindPokemonByTypeAndRegion(anyInt(), anyInt())).thenReturn(al);
-
-        // Ejecutar el test
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 50; i++) { // Repetir 50 veces para simular carga (adjust as needed)
-            juegoService.crearJuego();
-        }
-        long endTime = System.currentTimeMillis();
-
-        // Verificación del rendimiento
-        long totalTime = endTime - startTime;
-        double averageLatency = (double) totalTime / 50; // 50 iteraciones realizadas
-        assertTrue(averageLatency < 300); // Adaptar el valor según requisito especificado en @JUnitPerfTestRequirement
-    }
-
-    @Test
-    @JUnitPerfTest(threads = 20, durationMs = 1000) // Adjust threads and duration as needed
-    @JUnitPerfTestRequirement(meanLatency = 10) // Adaptar el valor según rendimiento esperado
-    public void testGetCondicionesTipoPerformance() {
+        // Crear una instancia de JuegoService
+        JuegoService juegoService = new JuegoService();
     
         // Ejecutar el test
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 1000; i++) { // Repetir 1000 veces para simular carga (adjust as needed)
-            juegoService.getCondicionesTipo();
+        for (int i = 0; i < 100; i++) { // Repetir 100 veces para simular carga (ajustar según sea necesario)
+            HashMap<Integer, List<String>> juego = (HashMap<Integer, List<String>>) juegoService.crearJuego();
+            // Verificar la generación de la matriz del juego
+            assertTrue(juego.size() == 9); // Número esperado de posiciones en la matriz
+            assertTrue(juego.values().stream().allMatch(list -> !list.isEmpty())); // Asegurar que cada posición tiene al menos un Pokémon
         }
         long endTime = System.currentTimeMillis();
     
-        // Verificación del rendimiento
+        // Calcular métricas de rendimiento
         long totalTime = endTime - startTime;
-        double averageLatency = (double) totalTime / 1000; // 1000 iteraciones realizadas
-        assertTrue(averageLatency < 10); // Adaptar el valor según requisito especificado en @JUnitPerfTestRequirement
+        double averageLatency = (double) totalTime / 100; // 100 iteraciones realizadas
+        assertTrue(averageLatency < 50); // Adaptar valor de latencia según @JUnitPerfTestRequirement
     }
 
     @Test
-    @JUnitPerfTest(threads = 20, durationMs = 1000) // Ajustar threads y duration según necesidad
-    @JUnitPerfTestRequirement(meanLatency = 10) // Adaptar el valor según rendimiento esperado
-    public void testGetCondicionesRegionPerformance() throws Exception {
+@JUnitPerfTest(threads = 20, durationMs = 3000)
+@JUnitPerfTestRequirement(meanLatency = 20) // Adjust latency value as needed
+public void testGetCondicionesTipo_Performance() throws Exception {
+    // Create an instance of JuegoService
+    JuegoService juegoService = new JuegoService();
 
-        // Ejecutar el test
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 1000; i++) { // Repetir 1000 veces para simular carga (ajustar según necesidad)
-            juegoService.getCondicionesRegion();
-        }
-        long endTime = System.currentTimeMillis();
+    // Generate a game matrix
+    HashMap<Integer, List<String>> juego = (HashMap<Integer, List<String>>) juegoService.crearJuego();
 
-        // Verificación del rendimiento
-        long totalTime = endTime - startTime;
-        double averageLatency = (double) totalTime / 1000; // 1000 iteraciones realizadas
-        assertTrue(averageLatency < 10); // Adaptar el valor según requisito especificado en @JUnitPerfTestRequirement
+    // Execute the test
+    long startTime = System.currentTimeMillis();
+    for (int i = 0; i < 100; i++) { // Repeat 100 times to simulate load (adjust as needed)
+        List<String> condicionesTipo = juegoService.getCondicionesTipo();
+        // Verify conditions retrieval
+        assertTrue(condicionesTipo.size() == 3); // Expected number of type conditions
+        assertTrue(condicionesTipo.stream().allMatch(condition -> !condition.isEmpty())); // Ensure each condition is not empty
     }
-}*/
+    long endTime = System.currentTimeMillis();
+
+    // Calculate performance metrics
+    long totalTime = endTime - startTime;
+    double averageLatency = (double) totalTime / 100; // 100 iterations performed
+    assertTrue(averageLatency < 20); // Adapt latency value according to @JUnitPerfTestRequirement
+}
+
+@Test
+@JUnitPerfTest(threads = 20, durationMs = 3000)
+@JUnitPerfTestRequirement(meanLatency = 20) // Adjust latency value as needed
+public void testGetCondicionesRegion_Performance() throws Exception {
+    // Create an instance of JuegoService
+    JuegoService juegoService = new JuegoService();
+
+    // Generate a game matrix
+    HashMap<Integer, List<String>> juego = (HashMap<Integer, List<String>>) juegoService.crearJuego();
+
+    // Execute the test
+    long startTime = System.currentTimeMillis();
+    for (int i = 0; i < 100; i++) { // Repeat 100 times to simulate load (adjust as needed)
+        List<String> condicionesRegion = juegoService.getCondicionesRegion();
+        // Verify conditions retrieval
+        assertTrue(condicionesRegion.size() == 3); // Expected number of region conditions
+        assertTrue(condicionesRegion.stream().allMatch(condition -> !condition.isEmpty())); // Ensure each condition is not empty
+    }
+    long endTime = System.currentTimeMillis();
+
+    // Calculate performance metrics
+    long totalTime = endTime - startTime;
+    double averageLatency = (double) totalTime / 100; // 100 iterations performed
+    assertTrue(averageLatency < 20); // Adapt latency value according to @JUnitPerfTestRequirement
+}
+}
+
+
+
+
+
