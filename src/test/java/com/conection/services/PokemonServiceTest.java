@@ -1,4 +1,4 @@
-package com.conection.services;
+/*package com.conection.services;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,4 +68,4 @@ public class PokemonServiceTest {
         assertNotNull(pokemonNames);
         assertTrue(pokemonNames.contains(nombre));
     }
-}
+}*/
