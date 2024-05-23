@@ -1,65 +1,85 @@
-/*package com.conection.services;
+package com.conection.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.conection.services.PokemonService;
+import com.conection.categories.PerformanceTest;
+import com.conection.entities.Pokemon;
+import com.conection.repository.PokemonRepository;
+import com.conection.repository.UsuarioRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PokemonServiceTest {
 
-    @Mock
-    private Connection mockConnection;
-
-    @Mock
-    private PreparedStatement mockStatement;
-
-    @Mock 
-    private ResultSet mockResultSet;
-
+    @InjectMocks
     private PokemonService pokemonService;
 
+    @Mock
+    private PokemonRepository pokemonRepository;
+
+    
+
     @Before
-    public void setUp() throws Exception {
-        // Configurar el comportamiento simulado para el PreparedStatement y ResultSet
-        when(mockConnection.prepareStatement(anyString())).thenReturn(mockStatement);
-        when(mockStatement.executeQuery()).thenReturn(mockResultSet);
+    public void setUp() {
+        pokemonService = new PokemonService();
+        pokemonRepository = Mockito.mock(PokemonRepository.class);
 
-        // Configurar el resultado simulado para el ResultSet
-        when(mockResultSet.next()).thenReturn(true).thenReturn(false); // Simular un solo resultado
-        when(mockResultSet.getString("Nombre")).thenReturn("Pikachu"); // Nombre del Pokemon simulado
 
-        // Crear una instancia del servicio con la conexión simulada
-        pokemonService = new PokemonService(mockConnection);
+        
+
     }
 
     @Test
-    public void testFindPokemonByTypeAndRegion() throws Exception {
-        // Llamar al método que queremos probar
-        ArrayList<String> result = pokemonService.FindPokemonByTypeAndRegion(1, 1);
+    public void testFindPokemonByTypeAndRegion() {
 
-        // Verificar las interacciones esperadas con los mocks
-        verify(mockConnection).prepareStatement(anyString());
-        verify(mockStatement).setInt(1, 1);
-        verify(mockStatement).setInt(2, 1);
-        verify(mockStatement).setInt(3, 1);
-        verify(mockStatement).executeQuery();
+        List<String> result = pokemonService.FindPokemonByTypeAndRegion(1, 8);
 
-        // Verificar que se obtuvo el nombre correcto del Pokemon simulado
-        assertEquals(1, result.size());
-        assertEquals("Pikachu", result.get(0));
+        List<String> esperado = new ArrayList<>();
+        esperado.add("SKWOVET");
+        esperado.add("GREEDENT");
+        esperado.add("WOOLOO");
+        esperado.add("DUBWOOL");
+        esperado.add("OBSTAGOON");
+
+        
+
+        assertEquals(esperado, result);
+        
     }
+
+    @Test
+    public void testInsertPokemon() {
+
+        boolean result = pokemonService.insertPokemon("prueba", 1, 2, 1);
+
+        assertTrue(result);
+        
+    }
+
+
+    /*@Test
+    public void testFindPokemonByTypeAndRegion() {
+        // Insertamos un Pokémon para que podamos probar la búsqueda
+        pokemonService.insertPokemon(nombre, tipo1, tipo2, region);
+
+        List<String> pokemonNames = pokemonService.FindPokemonByTypeAndRegion(tipo1, region);
+        assertNotNull(pokemonNames);
+        assertTrue(pokemonNames.contains(nombre));
+    }*/
 }
-*/

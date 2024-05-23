@@ -24,6 +24,11 @@
 		<server.hostname>127.0.0.1</server.hostname>
 		<server.port>8080</server.port>
 		Hata aqui -->
+		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<server.hostname>127.0.0.1</server.hostname>
+		<server.port>8080</server.port>
+		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 	</properties>
 	<dependencies>
 
@@ -118,11 +123,19 @@
 		</dependency>
 		<!--DEPENDENCIAS NUEVAS MOCKTIO-->
 
+<!--
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.13.2</version>
 			<scope>test</scope>
+		</dependency>
+-->
+		<dependency>
+    		<groupId>org.junit.vintage</groupId>
+    		<artifactId>junit-vintage-engine</artifactId>
+    		<version>5.11.0-M2</version>
+    		<scope>test</scope>
 		</dependency>
 	
 
@@ -157,6 +170,15 @@
 							</includes>
 						</fileset>
 					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.soebes.maven.plugins</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
 				</configuration>
 			</plugin>
 
@@ -215,11 +237,14 @@
 				</configuration>
 			</plugin>
 
+			<!-- -->
+
 			<plugin>
       			<groupId>org.apache.maven.plugins</groupId>
       			<artifactId>maven-surefire-plugin</artifactId>
       			<version>3.0.0-M5</version>
 				<configuration>
+					<argLine>@{argLine} --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
 					<!--<excludedGroups>categories.IntegrationTest, categories.PerformanceTest</excludedGroups> -->
 				</configuration>
       				<dependencies>
@@ -228,8 +253,9 @@
             				<artifactId>surefire-junit47</artifactId>
             				<version>3.0.0-M5</version>
          				</dependency>
-      				</dependencies>
+      				</dependencies> 
    			</plugin>
+
 
 			
       		<plugin>

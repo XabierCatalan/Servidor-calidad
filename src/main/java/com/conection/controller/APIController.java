@@ -242,7 +242,7 @@ public class APIController {
         int tipo2_ = tipoService.getIDTipoByName(tipo2);
         int region_ = regionService.getIDRegionByName(region);
         
-       
+        
         
         boolean metido = pokemonService.insertPokemon(nombre, tipo1_, tipo2_, region_);
 
@@ -260,6 +260,15 @@ public class APIController {
 
 
 
+    @RequestMapping("/getUsuarios")
+    public ArrayList<String> getUsuarios() {
+        ArrayList<String> lista = usuarioService.getUsuarios();
+        
+
+        
+
+        return lista;
+    }
     
 
 

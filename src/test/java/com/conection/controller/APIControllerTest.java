@@ -77,6 +77,8 @@ public class APIControllerTest {
         Usuario usuario2 = new Usuario(2, "unai2", "unai2", 2);
         Usuario usuario3 = new Usuario(3, "unai3", "unai3", 3);
 
+        
+
        
         when(usuarioService.checkUsuarioByCorreoContra("jonan", "jonan")).thenReturn(true);
         when(usuarioService.checkUsuarioByCorreoContra("jonan1", "jonan1")).thenReturn(false);
@@ -106,6 +108,20 @@ public class APIControllerTest {
         when(juegoService.getCondicionesRegion()).thenReturn(mockCondicionesRegion);
         when(juegoService.prueba()).thenReturn("Hola");
         when(juegoService.crearJuego()).thenReturn(mockJuego);
+
+        when(usuarioService.getUsuarios()).thenReturn(new ArrayList<String>());
+
+        when(pokemonService.insertPokemon("prueba", 1, 2, 1)).thenReturn(true);
+        when(pokemonService.insertPokemon("prueba1", 3, 4, 2)).thenReturn(false);
+
+        when(tipoService.getIDTipoByName("FUEGO")).thenReturn(1);
+        when(tipoService.getIDTipoByName("AGUA")).thenReturn(2);
+        when(tipoService.getIDTipoByName("HIELO")).thenReturn(3);
+        when(tipoService.getIDTipoByName("VOLADOR")).thenReturn(4);
+        when(regionService.getIDRegionByName("KANTO")).thenReturn(1);
+        when(regionService.getIDRegionByName("HOENN")).thenReturn(2);
+
+        
 
         
     }
@@ -325,6 +341,33 @@ public class APIControllerTest {
     @Test
     public void testInsertPokemon() {
 
+        String result = apiController.InsertPokemon("prueba", "FUEGO", "AGUA", "KANTO");
+        verify(tipoService).getIDTipoByName("FUEGO");
+        verify(tipoService).getIDTipoByName("AGUA");
+        verify(regionService).getIDRegionByName("KANTO");
+        verify(pokemonService).insertPokemon("prueba", 1, 2, 1);
+
+        assertEquals("Pokemon Insertado", result);
+
+        String result1 = apiController.InsertPokemon("prueba1", "HIELO", "VOLADOR", "HOENN");
+        verify(tipoService).getIDTipoByName("HIELO");
+        verify(tipoService).getIDTipoByName("VOLADOR");    
+        verify(regionService).getIDRegionByName("HOENN");
+        verify(pokemonService).insertPokemon("prueba1", 3, 4, 2);
+
+        assertEquals("Error al insertar el Pokemon desde el admin", result1);
+
+
+    }
+    
+
+    @Test
+    public void testGetUsuarios() {
+
+        List<String> result = apiController.getUsuarios();
+        verify(usuarioService).getUsuarios();
+        List<String> usuariosEsperados = new ArrayList<>();
+        assertEquals(usuariosEsperados, result);
 
 
 

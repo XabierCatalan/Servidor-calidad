@@ -7,11 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.datanucleus.store.types.wrappers.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.conection.entities.Usuario;
 import com.conection.repository.UsuarioRepository;
+import com.google.common.base.Strings;
 
 @Service
 public class UsuarioService {
@@ -87,4 +89,33 @@ public class UsuarioService {
 
         return usuario;
     }
+
+    public ArrayList<String> getUsuarios() {
+        String sql = "SELECT * FROM Usuarios";
+        ArrayList<String> usuarios = new ArrayList<>();
+
+        Usuario usuario;
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/pokedokuDB", "spq", "spq");
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            ResultSet resultSet=  statement.executeQuery();
+
+            while (resultSet.next()) {
+                usuario = new Usuario();
+                usuario.setId(resultSet.getInt("Id"));
+                usuario.setCorreo(resultSet.getString("Correo"));
+                usuario.setContra(resultSet.getString("Contra"));
+                usuario.setNivel(resultSet.getInt("Nivel"));
+                usuarios.add(usuario.toString());
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return usuarios;
+    }
+
+
 }

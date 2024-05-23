@@ -9,6 +9,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import org.junit.Before;
 
 import org.junit.Test;
@@ -96,6 +98,16 @@ public class UsuarioServiceTest {
         assertEquals(result.getCorreo(), usuario.getCorreo());
         assertEquals(result.getContra(), usuario.getContra());
         assertEquals(result.getNivel(), usuario.getNivel());
+    }
+
+    @Test
+    public void testGetUsuarios() {
+        
+        List<String> result = usuarioService.getUsuarios();
+
+        String primerEsperado = "Usuario{id=1, Correo='o.perez@opendeusto.es', Contra='o.perez', Nivel=2}";
+
+        assertEquals(primerEsperado, result.get(0));
     }
 
 
