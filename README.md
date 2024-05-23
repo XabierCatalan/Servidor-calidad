@@ -14,6 +14,9 @@ Este repositorio contiene una aplicación que utiliza tecnologías como Maven, S
 
 [Spring Boot](https://spring.io/projects/spring-boot) es un framework de Spring que facilita la creación de aplicaciones Java/JVM con una configuración mínima. Proporciona una forma rápida y sencilla de crear aplicaciones autónomas y listas para producir. Spring Boot incluye incorporadas muchas dependencias comunes y proporciona una configuración predeterminada sensata para tus aplicaciones.
 
+### Doxygen
+[Doxygen](https://www.doxygen.nl/).Este proyecto utiliza Doxygen para generar la documentación de código. Doxygen es una herramienta poderosa que facilita la creación de documentación a partir de comentarios en el código fuente. Esto asegura que la documentación esté siempre actualizada y vinculada directamente con el código. Para la configuración del Doxygen se utiliza un archivo llamado Doxyfile, este es el archivo de configuración utilizado por Doxygen para definir cómo se generará la documentación del proyecto. Este archivo contiene una serie de parámetros que controlan diferentes aspectos de la generación de la documentación, como el nombre del proyecto, las rutas de los archivos fuente, los formatos de salida y muchas otras opciones.
+
 
 ## Descripción del Proyecto
 
