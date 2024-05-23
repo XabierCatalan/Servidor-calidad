@@ -63,6 +63,16 @@ public class PokemonServiceTest {
         
     }
 
+    @Test
+    public void testInsertPokemon() {
+
+        boolean result = pokemonService.insertPokemon("prueba", 1, 2, 1);
+
+        assertTrue(result);
+        
+    }
+
+
     /*@Test
     public void testFindPokemonByTypeAndRegion() {
         // Insertamos un Pokémon para que podamos probar la búsqueda
