@@ -101,7 +101,12 @@ public class UsuariosTest {
         usuario2.setNivel(nivel);
         Assert.assertEquals(nivel, usuario2.getNivel());
     }
-
     
+
+    @Test
+    public void testToString() {
+        String esperado = "Usuario{id=1, Correo='o.perez@gmail.com', Contra='opled', Nivel=1}";
+        Assert.assertEquals(esperado, usuario2.toString());
+    }
 
 }
