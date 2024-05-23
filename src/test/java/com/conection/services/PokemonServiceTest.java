@@ -13,15 +13,18 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.conection.categories.PerformanceTest;
 import com.conection.entities.Pokemon;
 import com.conection.repository.PokemonRepository;
+import com.conection.repository.UsuarioRepository;
 
-@Category(PerformanceTest.class)
+@RunWith(MockitoJUnitRunner.class)
 public class PokemonServiceTest {
 
     @InjectMocks
@@ -30,34 +33,35 @@ public class PokemonServiceTest {
     @Mock
     private PokemonRepository pokemonRepository;
 
-    String nombre;
-    int tipo1;
-    int tipo2;
-    int region;
+    
 
     @Before
     public void setUp() {
         pokemonService = new PokemonService();
+        pokemonRepository = Mockito.mock(PokemonRepository.class);
 
-        nombre = "Pikachu";
-        tipo1 = 1; // Supongamos que 1 representa el tipo Eléctrico
-        tipo2 = 0; // Supongamos que 0 representa sin segundo tipo
-        region = 1; // Supongamos que 1 representa la región Kanto
 
-        Pokemon pokemon = new Pokemon(1, nombre, tipo1, tipo2, region);
-        when(pokemonRepository.save(Mockito.any(Pokemon.class))).thenReturn(pokemon);
+        
 
-        // Simulamos el comportamiento de búsqueda por tipo y región
-        List<Pokemon> pokemonList = new ArrayList<>();
-        pokemonList.add(pokemon);
-        when(pokemonRepository.findAll()).thenReturn(pokemonList);
     }
 
-    /*@Test
-    public void testInsertPokemon() {
-        boolean result = pokemonService.insertPokemon(nombre, tipo1, tipo2, region);
-        assertTrue(result);
-    }*/
+    @Test
+    public void testFindPokemonByTypeAndRegion() {
+
+        List<String> result = pokemonService.FindPokemonByTypeAndRegion(1, 8);
+
+        List<String> esperado = new ArrayList<>();
+        esperado.add("SKWOVET");
+        esperado.add("GREEDENT");
+        esperado.add("WOOLOO");
+        esperado.add("DUBWOOL");
+        esperado.add("OBSTAGOON");
+
+        
+
+        assertEquals(esperado, result);
+        
+    }
 
     /*@Test
     public void testFindPokemonByTypeAndRegion() {
